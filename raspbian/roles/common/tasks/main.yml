@@ -1,0 +1,40 @@
+- name: install standard components
+  become: yes
+  apt:
+    name:
+      - git
+      - vim
+
+- name: add a new user
+  become: yes
+  user:
+    name: "{{username}}"
+    group: sudo
+    password: "{{ 'password' | password_hash('sha512') }}"
+
+- name: mkdir .ssh
+  become: yes
+  file: dest=/home/{{username}}/.ssh/ state=directory owner={{username}} group=sudo mode=700
+
+- name: add authorized keys
+  become: yes
+  file: dest=/home/{{username}}/.ssh/authorized_keys state=touch owner={{username}} group=sudo mode=600
+
+- name: copy publickey
+  become: yes
+  copy: src=~/.ssh/id_ed25519.pub dest=/home/{{username}}/.ssh/authorized_keys
+
+- name: パスワード認証の無効化
+  become: yes
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^PasswordAuthentication"
+    insertafter: "^#PasswordAuthentication"
+    line: "PasswordAuthentication no"
+
+- name: チャレンジ・レスポンス認証の無効化
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^ChallengeResponseAuthentication"
+    insertafter: "^#ChallengeResponseAuthentication"
+    line: "ChallengeResponseAuthentication no"
