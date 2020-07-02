@@ -1,13 +1,17 @@
-- name: install docker-compose dependencies
+- name: install podman-compose dependencies
   dnf:
     name:
       - python3
       - python3-pip
   become: yes
-- name: install docker and docker-compose
+- name: install podman
+  dnf:
+    name:
+      - podman
+  become: yes
+- name: install podman-compose
   pip:
     name:
-      - docker
-      - docker-compose
+      - podman-compose
     executable: pip3
   become: yes
