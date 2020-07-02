@@ -1,0 +1,8 @@
+[centos8]
+1.1.1.1
+
+[centos8:vars]
+ansible_ssh_port=22
+ansible_ssh_user=exampleuser
+ansible_sudo_pass=password
+username=lapi

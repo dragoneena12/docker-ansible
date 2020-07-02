@@ -1,0 +1,13 @@
+- name: install docker-compose dependencies
+  dnf:
+    name:
+      - python3
+      - python3-pip
+  become: yes
+- name: install docker and docker-compose
+  pip:
+    name:
+      - docker
+      - docker-compose
+    executable: pip3
+  become: yes

@@ -1,0 +1,5 @@
+---
+- hosts: centos8
+  roles:
+    - common
+    - docker
