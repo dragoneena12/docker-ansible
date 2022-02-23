@@ -1,0 +1,5 @@
+- name: install standard components
+  yum:
+    name:
+      - git
+      - vim

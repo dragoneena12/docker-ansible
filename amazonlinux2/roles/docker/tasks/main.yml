@@ -1,0 +1,16 @@
+- name: install standard components
+  yum:
+    name:
+      - docker
+- name: add user to docker group
+  user: name=ec2-user groups=docker append=yes
+- name: start and enable docker
+  service:
+    name: docker
+    state: started
+    enabled: yes
+- name: download docker-compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+    dest: /usr/local/bin/docker-compose
+    mode: a+x

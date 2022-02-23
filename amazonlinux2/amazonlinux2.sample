@@ -1,0 +1,7 @@
+[amazonlinux2]
+1.1.1.1
+
+[amazonlinux2:vars]
+ansible_ssh_port=22
+ansible_ssh_user=ec2-user
+username=lapi

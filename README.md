@@ -3,7 +3,7 @@
 docker が動く環境を ansible で自動構築したい
 
 ```
-ansible-playbook site.yml
+ansible-playbook -b site.yml
 ```
 
 ## 実行内容
